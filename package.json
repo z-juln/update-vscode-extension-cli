@@ -1,5 +1,6 @@
 {
   "name": "update-vscode-extension-cli",
+  "shortname": "uvec",
   "version": "1.0.1",
   "description": "update-vscode-extension-cli",
   "main": "src/index.js",
@@ -12,7 +13,9 @@
     "src/*"
   ],
   "scripts": {
-    "uvec": "export DEBUG=$npm_package_name && node bin/index",
+    "prepublishOnly": "npg --cmd 'yarn release'",
+    "release": "cross-env SKIP_NPG=1 node ./script/release.js",
+    "uvec": "export DEBUG=$npm_package_shortname && node bin/index",
     "test:only-build": "npm run uvec -- package ../hupu-vscode-plugin --only-build --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'",
     "test:default": "npm run uvec -- package ../hupu-vscode-plugin --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'"
   },
@@ -39,6 +42,10 @@
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
     "@types/shelljs": "^0.8.11",
+    "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
+    "dot-json": "^1.2.2",
+    "np-guard": "^1.2.0",
     "vsce": "^2"
   },
   "peerDependencies": {

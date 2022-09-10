@@ -1,4 +1,4 @@
-const { name } = require('../package.json');
-const debug = require('debug')(name);
+const { shortname } = require('../package.json');
+const debug = require('debug')(shortname);
 
 module.exports = debug;
