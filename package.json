@@ -1,7 +1,7 @@
 {
   "name": "update-vscode-extension-cli",
   "shortname": "uvec",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "update-vscode-extension-cli",
   "main": "src/index.js",
   "bin": {
