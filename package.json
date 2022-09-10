@@ -19,6 +19,10 @@
     "test:only-build": "npm run uvec -- package ../hupu-vscode-plugin --only-build --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'",
     "test:default": "npm run uvec -- package ../hupu-vscode-plugin --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/z-juln/update-vscode-extension-cli.git"
