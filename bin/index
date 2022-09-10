@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+
+const { version } = require('../package.json');
+const cac = require('cac').default;
+const debug = require('../src/debug');
+const { packageCmd } = require('../src');
+
+const cmd = 'uvec';
+
+const cli = cac(cmd);
+
+const packageHelpText = `
+更多详情请看:
+  https://juejin.cn/post/7141662937420136479/
+`;
+
+cli
+  .command('package [cwd]', '', { allowUnknownOptions: true })
+  .option(
+    '--pkg-name',
+    '要发布的npm包的package.json中的name, 默认为vscode插件的package.json的name',
+    { type: 'string' }
+  )
+  .option(
+    '--pkg-version',
+    '默认为package.json中的version, 可用值: [new-version] | major | minor | patch | premajor | preminor | prepatch | prerelease',
+    { type: 'string' }
+  )
+  .option('--only-build', '', { type: 'boolean', default: false })
+  .option('--registry-url', '', { type: 'string', default: 'https://registry.npmjs.org/' })
+  .option('--cache-dir', '构建npm包的暂存区', { type: 'string', default: '~/.uvec' })
+  .option('--vsce', 'vsce package的参数', { type: 'object' })
+  .option('--publish', 'npm publish/yarn publish的参数', { type: 'object' })
+  .action((cwd = '.', opts) => {
+    debug('opts: ', { opts });
+    packageCmd({
+      cwd,
+      pkgName: opts.pkgName,
+      pkgVersion: opts.pkgVersion,
+      onlyBuild: opts.onlyBuild,
+      registryUrl: opts.registryUrl,
+      cacheDir: opts.cacheDir,
+      vsceOpts: opts.vsce || {},
+      publishOpts: opts.publish || {},
+    });
+  })
+  .examples = [
+    `onlyBuild模式(只构建npm包, 剩余部分自己实现): uvec package . --only-build --pkg-name='@hupu/vscode-extension' -vsce.out='hupu.vsix' --vsce.no-yarn --vsce.allow-star-activation`,
+    `default模式(打包并发布npm包): uvec package . --registry-url='http://hnpm.hupu.io/' --pkg-name='@hupu/vscode-extension' -vsce.out='hupu.vsix' --vsce.no-yarn --vsce.allow-star-activation`,
+  ].map(example => `  ${example}`);
+
+cli.help((helpSections) => {
+  helpSections.push({
+    body: packageHelpText,
+  });
+  return helpSections;
+});
+
+cli.version(version);
+cli.parse();

@@ -1,0 +1,54 @@
+{
+  "name": "update-vscode-extension-cli",
+  "version": "1.0.1",
+  "description": "update-vscode-extension-cli",
+  "main": "src/index.js",
+  "bin": {
+    "update-vscode-extension-cli": "bin/index",
+    "uvec": "bin/index"
+  },
+  "files": [
+    "bin/*",
+    "src/*"
+  ],
+  "scripts": {
+    "uvec": "export DEBUG=$npm_package_name && node bin/index",
+    "test:only-build": "npm run uvec -- package ../hupu-vscode-plugin --only-build --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'",
+    "test:default": "npm run uvec -- package ../hupu-vscode-plugin --pkg-name='@hupu/vscode-plugin' --pkg-version=patch --cache-dir=./dist --vsce.no-yarn --vsce.allow-star-activation -vsce.out='hupu.vsix'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/z-juln/update-vscode-extension-cli.git"
+  },
+  "keywords": [
+    "update-vscode-extension",
+    "update-vscode-extension-cli",
+    "vscode-extension",
+    "juln"
+  ],
+  "author": {
+    "name": "juln",
+    "url": "https://github.com/z-juln",
+    "email": "1850021148@qq.com"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/z-juln/update-vscode-extension-cli/issues"
+  },
+  "homepage": "https://github.com/z-juln/update-vscode-extension-cli#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/shelljs": "^0.8.11",
+    "vsce": "^2"
+  },
+  "peerDependencies": {
+    "vsce": "^2"
+  },
+  "dependencies": {
+    "cac": "^6.7.14",
+    "debug": "^4.3.4",
+    "fs-extra": "^10.1.0",
+    "semver": "^7.3.7",
+    "shelljs": "^0.8.5"
+  }
+}
