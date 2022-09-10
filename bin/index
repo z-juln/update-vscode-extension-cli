@@ -45,7 +45,7 @@ cli
     });
   })
   .examples = [
-    `onlyBuild模式(只构建npm包, 剩余部分自己实现): uvec package . --only-build --pkg-name='@hupu/vscode-extension' -vsce.out='hupu.vsix' --vsce.no-yarn --vsce.allow-star-activation`,
+    `onlyBuild模式(只构建npm包, 剩余部分自己实现): uvec package . --only-build --pkg-name='@hupu/vscode-extension' --vsce.out='hupu.vsix' --vsce.no-yarn --vsce.allow-star-activation`,
     `default模式(打包并发布npm包): uvec package . --registry-url='http://hnpm.hupu.io/' --pkg-name='@hupu/vscode-extension' -vsce.out='hupu.vsix' --vsce.no-yarn --vsce.allow-star-activation`,
   ].map(example => `  ${example}`);
 
